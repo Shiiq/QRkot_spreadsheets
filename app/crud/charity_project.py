@@ -24,11 +24,11 @@ class CharityProjectCRUD(CRUDBase):
                 [CharityProject.name,
                  CharityProject.description,
                  (
-                    func.julianday(CharityProject.close_date) -
-                    func.julianday(CharityProject.create_date)
-                 ).label('closing_time')]
-            ).where(CharityProject.fully_invested == true()
-            ).order_by('closing_time')
+                     func.julianday(CharityProject.close_date) -
+                     func.julianday(CharityProject.create_date)
+                 ).label('closing_time')])
+            .where(CharityProject.fully_invested == true())
+            .order_by('closing_time')
         )
         projects = projects.all()
         return projects

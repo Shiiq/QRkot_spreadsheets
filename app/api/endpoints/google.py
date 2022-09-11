@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.db import get_async_session
 from app.core.google_client import get_service
-from app.core.user import current_superuser, current_user
+from app.core.user import current_superuser
 
 from app.crud.charity_project import charity_project_crud
 
@@ -14,7 +14,7 @@ from app.services.google_api import (spreadsheets_create,
 
 # from core.db import get_async_session
 # from core.google_client import get_service
-# from core.user import current_superuser, current_user
+# from core.user import current_superuser
 #
 # from crud.charity_project import charity_project_crud
 #
@@ -27,7 +27,6 @@ router = APIRouter()
 
 @router.get(
     '/',
-    # response_model=list[dict[str, int]],
     dependencies=[Depends(current_superuser)],
 )
 async def get_projects_by_completion_rate(
