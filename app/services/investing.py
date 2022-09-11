@@ -7,6 +7,7 @@ from sqlalchemy.sql.expression import false
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models import CharityProject, Donation
+# from models import CharityProject, Donation
 
 
 async def get_invest_objects(

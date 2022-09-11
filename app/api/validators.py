@@ -8,6 +8,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.crud.charity_project import charity_project_crud
 from app.models import CharityProject
 
+# from crud.charity_project import charity_project_crud
+# from models import CharityProject
+
 
 async def check_unique_name(
         project_name: str,

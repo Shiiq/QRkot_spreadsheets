@@ -16,6 +16,18 @@ from app.schemas.charity_project import (CharityProjectCreate,
                                          CharityProjectFromDB)
 from app.services.investing import investing_process
 
+# from api.validators import (check_unique_name,
+#                                 check_project_exists,
+#                                 check_project_free_to_update,
+#                                 check_project_free_to_delete)
+# from core.db import get_async_session
+# from core.user import current_superuser
+# from crud.charity_project import charity_project_crud
+# from schemas.charity_project import (CharityProjectCreate,
+#                                      CharityProjectUpdate,
+#                                      CharityProjectFromDB)
+# from services.investing import investing_process
+
 router = APIRouter()
 
 

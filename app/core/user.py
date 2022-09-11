@@ -13,6 +13,10 @@ from app.core.config import settings
 from app.core.db import get_async_session
 from app.models import User
 from app.schemas.user import UserCreate
+# from core.config import settings
+# from core.db import get_async_session
+# from models import User
+# from schemas.user import UserCreate
 
 
 async def get_user_db(session: AsyncSession = Depends(get_async_session)):
