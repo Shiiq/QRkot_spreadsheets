@@ -2,10 +2,14 @@ from typing import Optional
 
 from pydantic import BaseSettings, EmailStr
 
+from app.core.constants import DB_NAME
+
 
 class Settings(BaseSettings):
-    app_title: str = 'Сервис пожертвований QRKot'
-    database_url: str = 'sqlite+aiosqlite:///./fastapi.db'
+    app_title: str = (
+        'Сервис пожертвований QRKot с поддержкой Google Spreadsheets API'
+    )
+    database_url: str = f'sqlite+aiosqlite:///./{DB_NAME}'
     description: str = 'Домашний проект'
     secret: str = 'extra_gin'
     first_superuser_email: Optional[EmailStr] = None

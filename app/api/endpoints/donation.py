@@ -10,13 +10,6 @@ from app.models import User
 from app.schemas.donation import DonationCreate, DonationResponse, DonationFromDB
 from app.services.investing import investing_process
 
-# from core.db import get_async_session
-# from core.user import current_user, current_superuser
-# from crud.donation import donation_crud
-# from models import User
-# from schemas.donation import DonationCreate, DonationResponse, DonationFromDB
-# from services.investing import investing_process
-
 router = APIRouter()
 
 
@@ -58,8 +51,8 @@ async def get_user_donations(
 
 @router.post(
     '/',
-    response_model_exclude_none=True,
-    response_model=DonationResponse
+    response_model=DonationResponse,
+    response_model_exclude_none=True
 )
 async def create_new_donation(
         donation: DonationCreate,

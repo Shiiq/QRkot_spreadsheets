@@ -1,7 +1,6 @@
 from sqlalchemy import Column, Boolean, Integer, DateTime
 
 from app.core.db import Base
-# from core.db import Base
 
 
 class FinBase(Base):

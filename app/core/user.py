@@ -1,3 +1,4 @@
+import logging
 from typing import Optional, Union
 
 from fastapi import Depends, Request
@@ -13,10 +14,9 @@ from app.core.config import settings
 from app.core.db import get_async_session
 from app.models import User
 from app.schemas.user import UserCreate
-# from core.config import settings
-# from core.db import get_async_session
-# from models import User
-# from schemas.user import UserCreate
+
+logging.basicConfig(format='%(message)s')
+log = logging.getLogger(__name__)
 
 
 async def get_user_db(session: AsyncSession = Depends(get_async_session)):
@@ -30,6 +30,7 @@ def get_jwt_strategy() -> JWTStrategy:
 bearer_transport = BearerTransport(
     tokenUrl='auth/jwt/login'
 )
+
 auth_backend = AuthenticationBackend(
     name='QRKot_auth_backend',
     transport=bearer_transport,
@@ -56,7 +57,7 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
     async def on_after_register(
             self, user: User, request: Optional[Request] = None
     ):
-        print(f'Пользователь {user.email} зарегистрирован.')
+        log.info(f'Пользователь {user.email} зарегистрирован.')
 
 
 async def get_user_manager(user_db=Depends(get_user_db)):

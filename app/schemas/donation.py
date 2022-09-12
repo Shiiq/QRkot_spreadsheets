@@ -9,8 +9,14 @@ from .fin_base import FinBaseSchema
 class DonationCreate(BaseModel):
     """Схема для создания пожертвования."""
 
-    full_amount: PositiveInt = Field(..., title='Сумма пожертвования')
-    comment: Optional[str] = Field(None, title='Комментарий к пожертвованию')
+    full_amount: PositiveInt = Field(
+        ...,
+        title='Сумма пожертвования'
+    )
+    comment: Optional[str] = Field(
+        None,
+        title='Комментарий к пожертвованию'
+    )
 
     class Config:
         extra = Extra.forbid

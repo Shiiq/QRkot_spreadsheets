@@ -1,8 +1,9 @@
 from datetime import datetime, timedelta
 
 from aiogoogle import Aiogoogle
+
 from app.core.config import settings
-# from core.config import settings
+from app.core.constants import API_TYPE, API_VERSION
 
 FORMAT = "%Y/%m/%d %H:%M:%S"
 
@@ -11,7 +12,7 @@ async def spreadsheets_create(wrapper_services: Aiogoogle):
     """Функция-запрос для создания гугл-документа. Вовзращает id документа."""
 
     now = datetime.now().strftime(FORMAT)
-    service = await wrapper_services.discover('sheets', 'v4')
+    service = await wrapper_services.discover(API_TYPE, API_VERSION)
     spreadsheet_body = {
         'properties': {'title': f'Отчет по проектам от {now}',
                        'locale': 'ru_RU'},

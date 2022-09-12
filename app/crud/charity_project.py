@@ -4,20 +4,14 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.crud.base import CRUDBase
 from app.models import CharityProject
 
-# from crud.base import CRUDBase
-# from models import CharityProject
-
 
 class CharityProjectCRUD(CRUDBase):
     """
     Класс для CRUD-операций модели CharityProject.
-    Добавлен метод для запроса пожертвований текущего юзера.
     """
 
     async def get_top_quick_closure_projects(self, session=AsyncSession):
-        """
-        Получает список проектов, отсортированных по скорости закрытия.
-        """
+        """Список проектов, отсортированных по скорости закрытия."""
 
         projects = await session.execute(
             select(

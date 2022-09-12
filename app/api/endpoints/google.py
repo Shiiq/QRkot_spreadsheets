@@ -1,3 +1,5 @@
+from typing import List, Dict
+
 from aiogoogle import Aiogoogle
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -5,28 +7,17 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.db import get_async_session
 from app.core.google_client import get_service
 from app.core.user import current_superuser
-
 from app.crud.charity_project import charity_project_crud
-
 from app.services.google_api import (spreadsheets_create,
                                      spreadsheets_update_value,
                                      set_user_permissions)
-
-# from core.db import get_async_session
-# from core.google_client import get_service
-# from core.user import current_superuser
-#
-# from crud.charity_project import charity_project_crud
-#
-# from services.google_api import (spreadsheets_create,
-#                                  spreadsheets_update_value,
-#                                  set_user_permissions)
 
 router = APIRouter()
 
 
 @router.get(
     '/',
+    response_model=List[Dict],
     dependencies=[Depends(current_superuser)],
 )
 async def get_projects_by_completion_rate(

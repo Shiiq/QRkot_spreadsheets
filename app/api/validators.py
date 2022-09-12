@@ -8,9 +8,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.crud.charity_project import charity_project_crud
 from app.models import CharityProject
 
-# from crud.charity_project import charity_project_crud
-# from models import CharityProject
-
 
 async def check_unique_name(
         project_name: str,
@@ -18,10 +15,11 @@ async def check_unique_name(
 ):
     """Проверка уникальности имени."""
 
-    is_exists = await session.execute(
+    project = await session.execute(
         select(CharityProject.id).where(CharityProject.name == project_name)
     )
-    if is_exists.scalars().first() is not None:
+    is_exists = project.scalars().first()
+    if is_exists:
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST,
             detail='Проект с таким именем уже существует!'
@@ -38,7 +36,7 @@ async def check_project_exists(
         obj_id=project_id,
         session=session
     )
-    if charity_project is None:
+    if not charity_project:
         raise HTTPException(
             status_code=HTTPStatus.NOT_FOUND,
             detail='Проект не найден!'

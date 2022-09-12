@@ -3,14 +3,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.crud.base import CRUDBase
 from app.models import Donation, User
-# from crud.base import CRUDBase
-# from models import Donation, User
 
 
 class DonationCRUD(CRUDBase):
     """
     Класс для CRUD-операций модели Donation.
-    Добавлен метод для запроса пожертвований текущего юзера.
     """
 
     async def get_donation_by_user(
@@ -18,6 +15,8 @@ class DonationCRUD(CRUDBase):
             user: User,
             session: AsyncSession
     ):
+        """Запрос пожертвований текущего юзера."""
+
         donations = await session.execute(
             select(Donation).where(
                 Donation.user_id == user.id

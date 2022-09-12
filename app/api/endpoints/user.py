@@ -3,9 +3,6 @@ from fastapi import APIRouter, HTTPException
 from app.core.user import auth_backend, fastapi_users
 from app.schemas.user import UserCreate, UserRead, UserUpdate
 
-# from core.user import auth_backend, fastapi_users
-# from schemas.user import UserCreate, UserRead, UserUpdate
-
 router = APIRouter()
 
 router.include_router(
@@ -13,11 +10,13 @@ router.include_router(
     prefix='/auth/jwt',
     tags=['auth'],
 )
+
 router.include_router(
     fastapi_users.get_register_router(UserRead, UserCreate),
     prefix='/auth',
     tags=['auth'],
 )
+
 router.include_router(
     fastapi_users.get_users_router(UserRead, UserUpdate),
     prefix='/users',

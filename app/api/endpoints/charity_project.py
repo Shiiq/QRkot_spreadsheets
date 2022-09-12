@@ -16,18 +16,6 @@ from app.schemas.charity_project import (CharityProjectCreate,
                                          CharityProjectFromDB)
 from app.services.investing import investing_process
 
-# from api.validators import (check_unique_name,
-#                                 check_project_exists,
-#                                 check_project_free_to_update,
-#                                 check_project_free_to_delete)
-# from core.db import get_async_session
-# from core.user import current_superuser
-# from crud.charity_project import charity_project_crud
-# from schemas.charity_project import (CharityProjectCreate,
-#                                      CharityProjectUpdate,
-#                                      CharityProjectFromDB)
-# from services.investing import investing_process
-
 router = APIRouter()
 
 
@@ -88,13 +76,13 @@ async def update_charity_project(
         session=session
     )
     # Если в запросе передано новое имя - проверяем уникальность
-    if charity_project_data.name is not None:
+    if charity_project_data.name:
         project_name = charity_project_data.name
         await check_unique_name(project_name, session)
     # Если в запросе передана новая сумма - проверяем условия
     # 1. Закрыт ли проект?
     # 2. Новая сумма меньше уже внесенной в проект?
-    if charity_project_data.full_amount is not None:
+    if charity_project_data.full_amount:
         full_amount = charity_project_data.full_amount
         charity_project = await check_project_free_to_update(
             project=charity_project,
